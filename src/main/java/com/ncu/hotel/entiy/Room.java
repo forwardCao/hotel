@@ -28,7 +28,7 @@ public class Room implements Serializable {
     private double groupTax;
 
     @JsonIgnore
-    @ManyToOne(cascade=CascadeType.ALL,fetch= FetchType.LAZY)
+    @ManyToOne
     private Hotel hotel;
 
     @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "room",orphanRemoval = true)
@@ -36,6 +36,17 @@ public class Room implements Serializable {
 
     @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "room",orphanRemoval = true)
     private Set<RoomDetail> roomDetails=new HashSet<>();
+
+    @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "room",orphanRemoval = true)
+    private Set<Orders> orders=new HashSet<>();
+
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
+    }
 
     public Set<RoomDetail> getRoomDetails() {
         return roomDetails;

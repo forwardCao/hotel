@@ -7,6 +7,7 @@ import org.hibernate.engine.profile.Fetch;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created bt caoqianfeng on 2019/2/5
@@ -26,10 +27,24 @@ public class Sale implements Serializable {
     private int marriedSum;
     private int otherRoomSum;
     private int commission;
+    private double birthdayPrice;
+    private double proposePrice;
+    private double marriedPrice;
+    private double otherPrice;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     @JsonIgnore
     @ManyToOne
     private Room room;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Room getRoom() {
         return room;
@@ -109,5 +124,37 @@ public class Sale implements Serializable {
 
     public void setCommission(int commission) {
         this.commission = commission;
+    }
+
+    public double getBirthdayPrice() {
+        return birthdayPrice;
+    }
+
+    public void setBirthdayPrice(double birthdayPrice) {
+        this.birthdayPrice = birthdayPrice;
+    }
+
+    public double getProposePrice() {
+        return proposePrice;
+    }
+
+    public void setProposePrice(double proposePrice) {
+        this.proposePrice = proposePrice;
+    }
+
+    public double getMarriedPrice() {
+        return marriedPrice;
+    }
+
+    public void setMarriedPrice(double marriedPrice) {
+        this.marriedPrice = marriedPrice;
+    }
+
+    public double getOtherPrice() {
+        return otherPrice;
+    }
+
+    public void setOtherPrice(double otherPrice) {
+        this.otherPrice = otherPrice;
     }
 }

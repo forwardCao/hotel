@@ -16,6 +16,11 @@ public class Hotel {
     private String brand;
     private int starLevel;
     private String address;
+    private String email;
+    private String leader;
+    private String Landline;
+    private String wechat;
+    private String tel;
 
     @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "hotel")
     private Set<Room> rooms=new HashSet<>();
@@ -77,5 +82,45 @@ public class Hotel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLeader() {
+        return leader;
+    }
+
+    public void setLeader(String leader) {
+        this.leader = leader;
+    }
+
+    public String getLandline() {
+        return Landline;
+    }
+
+    public void setLandline(String landline) {
+        Landline = landline;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 }

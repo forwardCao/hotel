@@ -1,6 +1,10 @@
 package com.ncu.hotel.entiy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created bt caoqianfeng on 2019/2/26
@@ -14,12 +18,60 @@ public class RoomDetail {
     private String windowOrientation;
     private byte wifi;
     private String feacture;
+    private byte flag;
+    private char roomType;
+    private int hotelID;
 
+    @JsonIgnore
     @ManyToOne
     private Room room;
 
-    @OneToOne(mappedBy = "roomDetail")
-    private Server server;
+    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
+    private Set<Accommodation> accommodations=new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
+    private Set<LoseGoods> loseGoods=new HashSet<>();
+
+    public byte getFlag() {
+        return flag;
+    }
+
+    public void setFlag(byte flag) {
+        this.flag = flag;
+    }
+
+    public char getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(char roomType) {
+        this.roomType = roomType;
+    }
+
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    public void setHotelID(int hotelID) {
+        this.hotelID = hotelID;
+    }
+
+    public Set<LoseGoods> getLoseGoods() {
+        return loseGoods;
+    }
+
+    public void setLoseGoods(Set<LoseGoods> loseGoods) {
+        this.loseGoods = loseGoods;
+    }
+
+    public Set<Accommodation> getAccommodations() {
+        return accommodations;
+    }
+
+    public void setAccommodations(Set<Accommodation> accommodations) {
+        this.accommodations = accommodations;
+    }
 
     public int getRoomNumber() {
         return roomNumber;

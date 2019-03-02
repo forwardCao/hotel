@@ -11,18 +11,30 @@ import java.io.Serializable;
 @Entity
 public class Staff {
     @Id
+    @GeneratedValue
     private int workID;
+    private int hotelID;
 
     private String cardID;
     private String department;
     private String name;
 
     @JsonIgnore
-    @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.LAZY)
+    @ManyToOne
     Hotel hotel;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "staff")
     private Server server;
+
+
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    public void setHotelID(int hotelID) {
+        this.hotelID = hotelID;
+    }
 
     public Server getServer() {
         return server;

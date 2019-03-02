@@ -1,8 +1,9 @@
 package com.ncu.hotel.entiy;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -11,20 +12,63 @@ import java.util.Date;
 @Entity
 public class Server {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int callID;
 
     private String callServerType;
     private String callServer;
+
+    @CreatedDate
     private Date callTime;
+
     private byte responseStatus;
     private int responseTime;
     private byte finishStatus;
     private int finishTime;
+    private int Satisfaction;
+    private String appraisal;
+    private int ID;
+    private int workID;
+
+    @JsonIgnore
+    @ManyToOne
+    private Accommodation accommodation;
+
 
     @OneToOne
-    private RoomDetail roomDetail;
-    @OneToOne
     private  Staff staff;
+
+    public int getSatisfaction() {
+        return Satisfaction;
+    }
+
+    public void setSatisfaction(int satisfaction) {
+        Satisfaction = satisfaction;
+    }
+
+    public String getAppraisal() {
+        return appraisal;
+    }
+
+    public void setAppraisal(String appraisal) {
+        this.appraisal = appraisal;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getWorkID() {
+        return workID;
+    }
+
+    public void setWorkID(int workID) {
+        this.workID = workID;
+    }
 
     public int getCallID() {
         return callID;
@@ -90,12 +134,12 @@ public class Server {
         this.finishTime = finishTime;
     }
 
-    public RoomDetail getRoomDetail() {
-        return roomDetail;
+    public Accommodation getAccommodation() {
+        return accommodation;
     }
 
-    public void setRoomDetail(RoomDetail roomDetail) {
-        this.roomDetail = roomDetail;
+    public void setAccommodation(Accommodation accommodation) {
+        this.accommodation = accommodation;
     }
 
     public Staff getStaff() {

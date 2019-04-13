@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>公司端</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <script th:src="@{../../js/main.js}"></script>
+    <script th:src="@{../../js/jquery.min.js}"></script>
+    <script th:src="@{../../js/jquery1.min.js}"></script>
+    <script th:src="@{../../js/jquery-1.11.3.min.js}"></script>
+    <link rel="stylesheet" th:href="@{../../css/company/index.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/company/base.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/company/ui.css}"/>
+    <script th:inline="javascript">
+        function f1(id,className) {
+            var num ="{";
+            num += jsonEncodeString("memberId",id)+",";
+            if (className == "qiyong") {
+                num += jsonEncodeString("flag",1);
+            }
+            else {
+                num += jsonEncodeString("flag",0);
+            }
+            num +="}";
+            console.log(num);
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/setMemberFlag',
+                success :function(data) {
+                    alert("OK");
+                    window.location.href="/company/memberManagement";
+                },
+                error :function(e) {
+                    alert(e);
+                }})
+        }
+        function f() {
+            var num ="{";
+            num += jsonEncodeString("name",$("#number").val());
+            num +="}";
+            console.log(num);
+
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/queryMS',
+                success :function(data) {
+                    var temp;
+                    if(data.sex == 0){
+                        temp = '女';
+                    }
+                    else {
+                        temp = '男';
+                    }
+                    $("#memberList").empty();
+                    $("#memberList").append("<tr id = " + data.memberId + "></tr>");
+                    $("#" + data.memberId).append("<td>" + data.memberId + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.name + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.userName + "</td>>");
+                    $("#" + data.memberId).append("<td>" + temp + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.birthday + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.address + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.tel + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.email + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.certificateType + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.certificateNumber + "</td>>");
+                    $("#" + data.memberId).append("<td><img" + " src=" + data.certificateFrontPhoto + "/>" + "</td>>");
+                    $("#" + data.memberId).append("<td><img" + " src=" + data.certificateReversePhoto + "/>" + "</td>>");
+                    $("#" + data.memberId).append("<td>" + data.credit + "</td>>");
+                    if (data.flag == 0)
+                    {
+                        $("#" + data.memberId).append("<td>" + "<button class='qiyong' " + "id= " + data.memberId + " onclick=\"f1(this.id,this.className)\"> 启用 </button> " + "</td>>");
+                    }
+                    else{
+                        $("#" + data.memberId).append("<td>" +  "<button class='jinyong' " + "id= " + data.memberId + " onclick=\"f1(this.id,this.className)\"> 禁用 </button> " +  "</td>>");
+                    }
+
+                },
+                error :function(e) {
+                    alert(e);
+                }})
+        }
+
+        jsonEncodeString=function(label, value)
+        {
+            var tmpVal = "\""+label+"\"";
+            tmpVal += ":";
+            tmpVal +="\""+value+"\"";
+
+            return tmpVal;
+        };
+    </script>
+</head>
+<body>
+    <header class="ui-flex">
+        <div class="logo">
+            盈希智慧酒店软件（公司端）
+        </div>
+        <div class="ui-flex-1"></div>
+        <div class="name">你好！管理员01</div>
+        <div class="out">退出</div>
+    </header>
+
+    <div class="layout ui-flex">
+        <ul class="menu">
+            <li>
+                <a href="hotelManagement">
+                    <img src="../../images/gsd_03.jpg">
+                    酒店管理
+                </a>
+            </li>
+            <li>
+                <a href="memberManagement" class="ac">
+                    <img src="../../images/gsd_10.jpg">
+                    会员管理
+                </a>
+            </li>
+            <li>
+                <a href="sumUp">
+                    <img src="../../images/gsd_12.jpg">
+                    核算统计
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../../images/gsd_14.jpg">
+                    税金发票
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../../images/gsd_16.jpg">
+                    公    益
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../../images/gsd_18.jpg">
+                    客服中心
+                </a>
+            </li>
+        </ul>
+
+        <div class="ui-flex-1 l_right">
+            <div class="search">
+                <input type="text" placeholder="会员号/证件号码/手机号" id="number">
+                <button onclick="f()">
+                    <img src="../../images/gsd_06.jpg">
+                    搜索
+                </button>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>会员号</th>
+                        <th>用户名</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>出生日期</th>
+                        <th>地址</th>
+                        <th>手机号</th>
+                        <th>电子邮箱</th>
+                        <th>证件类型</th>
+                        <th>证件号码</th>
+                        <th style="width: 200px">证件正面照片</th>
+                        <th style="width: 200px">证件反面照片</th>
+                        <th>信用</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="memberList">
+                    <tr th:each="member:${Member}">
+                        <td th:text="${member.memberId}">0028</td>
+                        <td th:text="${member.userName}">张三</td>
+                        <td th:text="${member.name}">666</td>
+                        <td>
+                            <li th:if="${member.sex} eq '0'">女</li>
+                            <li th:if="${member.sex} eq '1'">男</li>
+                        </td>
+                        <td th:text="${member.birthday}"></td>
+                        <td th:text="${member.address}"></td>
+                        <td th:text="${member.tel}"></td>
+                        <td th:text="${member.email}"></td>
+                        <td th:text="${member.certificateType}"></td>
+                        <td th:text="${member.certificateNumber}"></td>
+                        <td><img th:src="@{${member.certificateFrontPhoto}}"/></td>
+                        <td><img th:src="@{${member.certificateReversePhoto}}"/></td>
+                        <td th:text="${member.credit}"></td>
+                        <td>
+                            <button class="qiyong" th:if="${member.flag} eq '0'" th:id="${member.memberId}" onclick="f1(this.id,this.className)">
+                                启用
+                            </button>
+                            <button class="jinyong" th:if="${member.flag} eq '1'" th:id="${member.memberId}" onclick="f1(this.id,this.className)">
+                                禁用
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -10,5 +10,6 @@ import java.io.Serializable;
  * Created bt caoqianfeng on 2019/2/27
  */
 public interface MemberJpa extends JpaRepository<Member, Integer>, JpaSpecificationExecutor<Member>, Serializable {
-
+    Member findByMemberIdOrCertificateNumberOrTel(int memberid,String certificatenumber,String tel);
+    Member findByCertificateNumberOrTel(String certificatenumber,String tel);
 }

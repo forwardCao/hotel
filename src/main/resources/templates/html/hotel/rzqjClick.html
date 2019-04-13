@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店端</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/index.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/base.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/ui.css}"/>
+    <script th:src="@{../../js/main.js}"></script>
+    <script th:src="@{../../js/jquery.min.js}"></script>
+    <script th:src="@{../../js/jquery1.min.js}"></script>
+    <script th:src="@{../../js/jquery-1.11.3.min.js}"></script>
+</head>
+<body>
+    <header class="ui-flex">
+        <dov class="logo">
+            盈希智慧酒店软件（酒店端）
+        </dov>
+        <div class="ui-flex-1"></div>
+        <div class="name">你好！管理员01</div>
+        <div class="out">退出</div>
+    </header>
+
+    <div class="layout ui-flex">
+        <ul class="menu">
+            <li>
+                <a href="roomManagement">
+                    <img src="../../images/index_05.jpg">
+                    客房管理
+                </a>
+            </li>
+            <li>
+                <a href="checkInPeroid" class="ac">
+                    <img src="../../images/index_12.jpg">
+                    入住期间
+                </a>
+            </li>
+            <li>
+                <a href="restGoods">
+                    <img src="../../images/index_14.jpg">
+                    遗留物品
+                </a>
+            </li>
+            <li>
+                <a href="feeSumUp">
+                    <img src="../../images/index_19.jpg">
+                    房费统计
+                </a>
+            </li>
+            <li>
+                <a href="feedbackManagement">
+                    <img src="../../images/index_22.jpg">
+                    评价管理
+                </a>
+            </li>
+            <li>
+                <a href="performanceScore">
+                    <img src="../../images/index_24.jpg">
+                    绩效分值
+                </a>
+            </li>
+        </ul>
+
+        <div class="ui-flex-1 l_right">
+            <div class="search">
+                <input type="text" placeholder="请输入房间号" id="number">
+                <button onclick="f()">
+                    <img src="../../images/index_08.jpg">
+                    搜索
+                </button>
+            </div>
+
+            <div class="rzqj_tabs ui-flex">
+                <div id="-1" class="item" onclick="f1(this.id)">
+                    全部(<span th:text="${all}">4</span>)
+                </div>
+                <div id="0" class="item" onclick="f1(this.id)">
+                    超时未应答(<span th:text="${notResponse}">4</span>)
+                </div>
+                <div id="1" class="item" onclick="f1(this.id)">
+                    超时未完成(<span th:text="${notFinsh}">4</span>)
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th rowspan="2">房间号</th>
+                        <th rowspan="2">会员号</th>
+                        <th rowspan="2">入住人</th>
+                        <th rowspan="2">呼叫时间</th>
+                        <th rowspan="2">呼叫服务</th>
+                        <th rowspan="2">工作人员</th>
+                        <th rowspan="2">所属部门</th>
+                        <th colspan="2">应答</th>
+                        <th colspan="2">完成</th>
+                        <th rowspan="2">顾客满意度</th>
+                        <th rowspan="2">顾客评分</th>
+                        <th rowspan="2">绩效分值</th>
+                    </tr>
+                    <tr>
+                        <th>状态</th>
+                        <th>超时(n)</th>
+                        <th>状态</th>
+                        <th>超时(n)</th>
+                    </tr>
+                </thead>
+                <tbody id="checkInList">
+                    <tr th:each="server:${page.content}">
+                        <td th:text="${server.accommodation.roomNumber}">401</td>
+                        <td th:text="${server.accommodation.member.memberId}">688</td>
+                        <td th:text="${server.accommodation.member.name}">张三</td>
+                        <td th:text="${server.callTime}">12:30</td>
+                        <td th:text="${server.callServerType}">洗衣</td>
+                        <td th:text="${server.staff.name}">张三</td>
+                        <td th:text="${server.staff.department}">客房部</td>
+                        <td th:text="${server.responseStatus}"></td>
+                        <td th:text="${server.responseTime}"></td>
+                        <td th:text="${server.finishStatus}"></td>
+                        <td th:text="${server.finishTime}"></td>
+                        <td th:text="${server.accommodation.customerStatisfaction}">五星</td>
+                        <td th:text="${server.accommodation.customerEvaluate}">服务很好</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div class="pages ui-flex">
+                <!--<div class="ui-flex-1"></div>-->
+                <!--<div class="next">上一页</div>-->
+                <!--<ul class="ui-flex">-->
+                    <!--<li><a href="#" class="ac">1</a></li>-->
+                    <!--<li><a href="#">2</a></li>-->
+                    <!--<li><a href="#">3</a></li>-->
+                    <!--<li><a href="#">4</a></li>-->
+                    <!--<li><a href="#">5</a></li>-->
+                    <!--<li><a href="#">6</a></li>-->
+                    <!--<li><a href="#">...</a></li>-->
+                    <!--<li><a href="#">10</a></li>-->
+                <!--</ul>-->
+                <!--<div class="next">下一页</div>-->
+                <!--<div class="ui-flex-1"></div>-->
+                <div class="ui-flex-1"></div>
+                <span th:if="${page.hasPrevious()}">
+                    <a th:href="@{/hotel/rzqjClick(pageNumber=${page.number-1},status=${status})}">Previous</a>
+                </span>
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                    <span th:unless="${page.number == i}">
+                         <a th:href="@{/hotel/rzqjClick(pageNumber=${i},status=${status})}">[[${i}+1]]</a>
+                    </span>
+                </th:block>
+                <span th:if="${page.hasNext()}">
+                    <a th:href="@{/hotel/rzqjClick(pageNumber=${page.number+1},status=${status})}">Next</a>
+                </span>
+                <div class="ui-flex-1"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script th:inline="javascript">
+
+    var type = [[${status}]];
+    changeCss(type);
+    function changeCss(id) {
+
+        $(".item").removeClass("ac");
+        if(id == '-1') $("#-1").addClass("ac");
+        else if(id == '0') $("#0").addClass("ac");
+        else if(id == '1') $("#1").addClass("ac");
+    }
+
+    function f1(id) {
+
+        var link ="/hotel/rzqjClick" + '?pageNumber='+0+ '&status='+parseInt(id);
+        window.location.href=link;
+
+
+
+    }
+    function f() {
+        var num ="{";
+        num += jsonEncodeString("name",$("#number").val());
+        num +="}";
+        // console.log(num);
+
+        $.ajax({
+            type:'post',
+            data:num,
+            contentType :'application/json;charset=UTF-8',
+            dataType:'json',
+            url :'/test/queryRS1',
+            success :function(data) {
+                $("#checkInList").empty();
+                $.each(data, function (index, data) {
+                    $("#checkInList").append("<tr id = " + data.callID + "></tr>");
+                    $("#" + data.callID).append("<td>" + data.accommodation.roomNumber + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.accommodation.member.memberId + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.accommodation.member.name + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.callTime + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.callServerType + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.staff.name + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.staff.department + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.responseStatus + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.responseTime + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.finishStatus + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.finishTime + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.accommodation.customerStatisfaction + "</td>>");
+                    $("#" + data.callID).append("<td>" + data.accommodation.customerEvaluate + "</td>>");
+                })
+            },
+            error :function(e) {
+                alert(e);
+            }})
+    }
+
+    jsonEncodeString=function(label, value)
+    {
+        var tmpVal = "\""+label+"\"";
+        tmpVal += ":";
+        tmpVal +="\""+value+"\"";
+
+        return tmpVal;
+    };
+</script>
+
+</html>

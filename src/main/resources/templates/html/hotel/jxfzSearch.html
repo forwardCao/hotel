@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店端</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/index.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/base.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/ui.css}"/>
+    <script th:src="@{../../js/jquery1.min.js}"></script>
+    <script th:src="@{../../js/jquery-1.11.3.min.js}"></script>
+    <script th:inline="javascript">
+
+        var a = [[${servers}]];
+        // console.log(a);
+
+        function f1() {
+            var engineering = $("#engineering").find("option:selected").val();
+            var consulting = $("#consulting").find("option:selected").val();
+            var fooding = $("#fooding").find("option:selected").val();
+            var num ="{";
+            num += jsonEncodeString("engineering",engineering)+",";
+            num += jsonEncodeString("consulting",consulting)+",";
+            num += jsonEncodeString("fooding",fooding);
+            num +="}";
+            // console.log(num);
+        }
+        function f() {
+            var yearBg = $("#yearBegin").find("option:selected").val();
+            var monthBg = $("#monthBegin").find("option:selected").val();
+            var dayBg = $("#dayBegin").find("option:selected").val();
+            var begin = yearBg + "-" + monthBg + "-" + dayBg;
+            var yearEd = $("#yearEnd").find("option:selected").val();
+            var monthEd = $("#monthEnd").find("option:selected").val();
+            var dayEd = $("#dayEnd").find("option:selected").val();
+            var end = yearEd + "-" + monthEd + "-" + dayEd;
+            var num ="{";
+            num += jsonEncodeString("dateBegin",begin)+",";
+            num += jsonEncodeString("dateEnd",end);
+            num +="}";
+            // console.log(num);
+            var link ="/hotel/jxfz_serach" + '?pageNumber='+0 + '&startDate='+begin+ '&endDate='+end ;
+            window.location.href=link;
+            // $.ajax({
+            //     type:'post',
+            //     data:num,
+            //     contentType :'application/json;charset=UTF-8',
+            //     dataType:'json',
+            //     url :'/test/queryFangFei',
+            //     success :function(data) {
+            //         var num = 0;
+            //         $("#roomFeeList").empty();
+            //         $.each(data, function (index, data) {
+            //             $("#roomFeeList").append("<tr id = " + data.id + "></tr>");
+            //             $("#" + data.id).append("<td>" + data.roomNumber + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.roomDetail.roomType + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.date + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.roomDetail.room.generalPrice + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.addPrice + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.damage + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.tax + "</td>>");
+            //             $("#" + data.id).append("<td>" + data.commission + "</td>>");
+            //             var temp = 0;
+            //             num++;
+            //             temp = parseInt(data.roomDetail.room.generalPrice);
+            //             temp += parseInt(data.damage);
+            //             temp += parseInt(data.addPrice);
+            //             temp += parseInt(data.tax);
+            //             temp += parseInt(data.commission);
+            //             $("#" + data.id).append("<td>"+ temp + "</td>>");
+            //             $("#previous").attr('href','https://www.baidu.com');
+            //             $("#next").attr('href','https://www.baidu.com');
+            //             // id = document.getElementById(num);
+            //             // id.attr('href','https://www.baidu.com');
+            //         })
+            //     },
+            //     error :function(e) {
+            //         alert(e);
+            //     }})
+
+        }
+        jsonEncodeString=function(label, value)
+        {
+            var tmpVal = "\""+label+"\"";
+            tmpVal += ":";
+            tmpVal +="\""+value+"\"";
+
+            return tmpVal;
+        };
+    </script>
+</head>
+<body>
+<header class="ui-flex">
+    <dov class="logo">
+        盈希智慧酒店软件（酒店端）
+    </dov>
+    <div class="ui-flex-1"></div>
+    <div class="name">你好！管理员01</div>
+    <div class="out">退出</div>
+</header>
+
+<div class="layout ui-flex">
+    <ul class="menu">
+        <li>
+            <a href="roomManagement">
+                <img src="../../images/index_05.jpg">
+                客房管理
+            </a>
+        </li>
+        <li>
+            <a href="checkInPeroid">
+                <img src="../../images/index_12.jpg">
+                入住期间
+            </a>
+        </li>
+        <li>
+            <a href="restGoods">
+                <img src="../../images/index_14.jpg">
+                遗留物品
+            </a>
+        </li>
+        <li>
+            <a href="feeSumUp">
+                <img src="../../images/index_19.jpg">
+                房费统计
+            </a>
+        </li>
+        <li>
+            <a href="feedbackManagement">
+                <img src="../../images/index_22.jpg">
+                评价管理
+            </a>
+        </li>
+        <li>
+            <a href="performanceScore" class="ac">
+                <img src="../../images/index_24.jpg">
+                绩效分值
+            </a>
+        </li>
+    </ul>
+
+    <div class="ui-flex-1 l_right">
+        <div class="s_slect mgr_180 ui-flex">
+            <select id="engineering">
+                <option value="工程部" th:selected="${engineering=='工程部'}">工程部</option>
+                <option value="工程部" th:selected="${engineering=='工程部'}">工程部</option>
+                <option value="工程部" th:selected="${engineering=='工程部'}">工程部</option>
+            </select>
+        </div>
+        <div class="s_slect search ui-flex">
+            <input type="text" placeholder="请输入姓名">
+            <button onclick="f1()">
+                <img src="../../images/index_08.jpg">
+                搜索
+            </button>
+            <select id="consulting">
+                <option value="客服部" th:selected="${consulting=='客服部'}">客服部</option>
+                <option value="客服部" th:selected="${consulting=='客服部'}">客服部</option>
+                <option value="客服部" th:selected="${consulting=='客服部'}">客服部</option>
+            </select>
+            <div class="ui-flex-1"></div>
+            <div class="text">
+                绩效分值  总分538分
+            </div>
+        </div>
+        <div class="s_slect mgr_180 ui-flex">
+            <select id="fooding">
+                <option value="餐饮部" th:selected="${fooding=='餐饮部'}">餐饮部</option>
+                <option value="餐饮部" th:selected="${fooding=='餐饮部'}">餐饮部</option>
+                <option value="餐饮部" th:selected="${fooding=='餐饮部'}">餐饮部</option>
+            </select>
+        </div>
+
+        <br>
+        <div class="times ui-flex search">
+            <span>查询期间：</span>
+            <select id="yearBegin">
+                <option value="2019" th:selected="${yearBegin=='2019'}">2019</option>
+                <option value="2018" th:selected="${yearBegin=='2018'}">2018</option>
+                <option value="2017" th:selected="${yearBegin=='2017'}">2017</option>
+            </select>
+            <span>年</span>
+            <select id="monthBegin">
+                <option value="1" th:selected="${monthBegin=='1'}">1</option>
+                <option value="2" th:selected="${monthBegin=='2'}">2</option>
+                <option value="3" th:selected="${monthBegin=='3'}">3</option>
+                <option value="4" th:selected="${monthBegin=='4'}">4</option>
+                <option value="5" th:selected="${monthBegin=='5'}">5</option>
+                <option value="6" th:selected="${monthBegin=='6'}">6</option>
+                <option value="7" th:selected="${monthBegin=='7'}">7</option>
+                <option value="8" th:selected="${monthBegin=='8'}">8</option>
+                <option value="9" th:selected="${monthBegin=='9'}">9</option>
+                <option value="10" th:selected="${monthBegin=='10'}">10</option>
+                <option value="11" th:selected="${monthBegin=='11'}">11</option>
+                <option value="12" th:selected="${monthBegin=='12'}">12</option>
+            </select>
+            <span>月</span>
+            <select id="dayBegin">
+                <option value="1" th:selected="${dayBegin=='1'}">1</option>
+                <option value="2" th:selected="${dayBegin=='2'}">2</option>
+                <option value="3" th:selected="${dayBegin=='3'}">3</option>
+                <option value="4" th:selected="${dayBegin=='4'}">4</option>
+                <option value="5" th:selected="${dayBegin=='5'}">5</option>
+                <option value="6" th:selected="${dayBegin=='6'}">6</option>
+                <option value="7" th:selected="${dayBegin=='7'}">7</option>
+                <option value="8" th:selected="${dayBegin=='8'}">8</option>
+                <option value="9" th:selected="${dayBegin=='9'}">9</option>
+                <option value="10" th:selected="${dayBegin=='10'}">10</option>
+                <option value="11" th:selected="${dayBegin=='11'}">11</option>
+                <option value="12" th:selected="${dayBegin=='12'}">12</option>
+                <option value="13" th:selected="${dayBegin=='13'}">13</option>
+                <option value="14" th:selected="${dayBegin=='14'}">14</option>
+                <option value="15" th:selected="${dayBegin=='15'}">15</option>
+                <option value="16" th:selected="${dayBegin=='16'}">16</option>
+                <option value="17" th:selected="${dayBegin=='17'}">17</option>
+                <option value="18" th:selected="${dayBegin=='18'}">18</option>
+                <option value="19" th:selected="${dayBegin=='19'}">19</option>
+                <option value="20" th:selected="${dayBegin=='20'}">20</option>
+                <option value="21" th:selected="${dayBegin=='21'}">21</option>
+                <option value="21" th:selected="${dayBegin=='22'}">22</option>
+                <option value="22" th:selected="${dayBegin=='23'}">23</option>
+                <option value="24" th:selected="${dayBegin=='24'}">24</option>
+                <option value="25" th:selected="${dayBegin=='25'}">25</option>
+                <option value="26" th:selected="${dayBegin=='26'}">26</option>
+                <option value="27" th:selected="${dayBegin=='27'}">27</option>
+                <option value="28" th:selected="${dayBegin=='28'}">28</option>
+                <option value="29" th:selected="${dayBegin=='29'}">29</option>
+                <option value="30" th:selected="${dayBegin=='30'}">30</option>
+                <option value="31" th:selected="${dayBegin=='31'}">31</option>
+            </select>
+            <span>日</span>
+            <span>~</span>
+            <select id="yearEnd">
+                <option value="2019" th:selected="${yearEnd=='2019'}">2019</option>
+                <option value="2018" th:selected="${yearEnd=='2018'}">2018</option>
+                <option value="2017" th:selected="${yearEnd=='2017'}">2017</option>
+            </select>
+            <span>年</span>
+            <select id="monthEnd">
+                <option value="1" th:selected="${monthEnd=='1'}">1</option>
+                <option value="2" th:selected="${monthEnd=='2'}">2</option>
+                <option value="3" th:selected="${monthEnd=='3'}">3</option>
+                <option value="4" th:selected="${monthEnd=='4'}">4</option>
+                <option value="5" th:selected="${monthEnd=='5'}">5</option>
+                <option value="6" th:selected="${monthEnd=='6'}">6</option>
+                <option value="7" th:selected="${monthEnd=='7'}">7</option>
+                <option value="8" th:selected="${monthEnd=='8'}">8</option>
+                <option value="9" th:selected="${monthEnd=='9'}">9</option>
+                <option value="10" th:selected="${monthEnd=='10'}">10</option>
+                <option value="11" th:selected="${monthEnd=='11'}">11</option>
+                <option value="12" th:selected="${monthEnd=='12'}">12</option>
+            </select>
+            <span>月</span>
+            <select id="dayEnd">
+                <option value="1" th:selected="${dayEnd=='1'}">1</option>
+                <option value="2" th:selected="${dayEnd=='2'}">2</option>
+                <option value="3" th:selected="${dayEnd=='3'}">3</option>
+                <option value="4" th:selected="${dayEnd=='4'}">4</option>
+                <option value="5" th:selected="${dayEnd=='5'}">5</option>
+                <option value="6" th:selected="${dayEnd=='6'}">6</option>
+                <option value="7" th:selected="${dayEnd=='7'}">7</option>
+                <option value="8" th:selected="${dayEnd=='8'}">8</option>
+                <option value="9" th:selected="${dayEnd=='9'}">9</option>
+                <option value="10" th:selected="${dayEnd=='10'}">10</option>
+                <option value="11" th:selected="${dayEnd=='11'}">11</option>
+                <option value="12" th:selected="${dayEnd=='12'}">12</option>
+                <option value="13" th:selected="${dayEnd=='13'}">13</option>
+                <option value="14" th:selected="${dayEnd=='14'}">14</option>
+                <option value="15" th:selected="${dayEnd=='15'}">15</option>
+                <option value="16" th:selected="${dayEnd=='16'}">16</option>
+                <option value="17" th:selected="${dayEnd=='17'}">17</option>
+                <option value="18" th:selected="${dayEnd=='18'}">18</option>
+                <option value="19" th:selected="${dayEnd=='19'}">19</option>
+                <option value="20" th:selected="${dayEnd=='20'}">20</option>
+                <option value="21" th:selected="${dayEnd=='21'}">21</option>
+                <option value="21" th:selected="${dayEnd=='22'}">22</option>
+                <option value="22" th:selected="${dayEnd=='23'}">23</option>
+                <option value="24" th:selected="${dayEnd=='24'}">24</option>
+                <option value="25" th:selected="${dayEnd=='25'}">25</option>
+                <option value="26" th:selected="${dayEnd=='26'}">26</option>
+                <option value="27" th:selected="${dayEnd=='27'}">27</option>
+                <option value="28" th:selected="${dayEnd=='28'}">28</option>
+                <option value="29" th:selected="${dayEnd=='29'}">29</option>
+                <option value="30" th:selected="${dayEnd=='30'}">30</option>
+                <option value="31" th:selected="${dayEnd=='31'}">31</option>
+            </select>
+            <span>日</span>
+            <button onclick="f()">
+                <img src="../../images/index_08.jpg">
+                搜索
+            </button>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th rowspan="2">工号</th>
+                <th rowspan="2">姓名</th>
+                <th rowspan="2">所属部门</th>
+                <th rowspan="2">呼叫房间</th>
+                <th rowspan="2">呼叫时间</th>
+                <th rowspan="2">呼叫服务</th>
+                <th colspan="2">应答</th>
+                <th colspan="2">完成</th>
+                <th rowspan="2">绩效分值1</th>
+            </tr>
+            <tr>
+                <th>超时(n)</th>
+                <th>单次罚分</th>
+                <th>超时(n)</th>
+                <th>单次罚分</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="server:${page.content}">
+                <td th:text="${server.workID}">1234</td>
+                <td th:text="${server.staff.name}">张兰</td>
+                <td th:text="${server.staff.department}">客房部</td>
+                <td th:text="${server.accommodation.roomNumber}">201</td>
+                <td th:text="${server.callTime}">2018-09-02 15:32:20</td>
+                <td th:text="${server.callServer}">饮用水2瓶</td>
+                <td th:text="${server.responseTime}">1</td>
+                <td th:text="${staff}">0</td>
+                <td th:text="${server.finishTime}">1</td>
+                <td th:text="${staff}">3</td>
+                <td th:text="${staff}">3</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="pages ui-flex">
+            <div class="ui-flex-1"></div>
+            <span th:if="${page.hasPrevious()}" class="next">
+                    <a th:href="@{/hotel/jxfz_serach(pageNumber=${page.number-1},startDate=${startDate},endDate=${endDate}}" id="previous" onclick="f3()">上一页</a>
+                </span>
+            <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                <span th:if="${page.number == i}" class="selected ac">[[${i}+1]]</span>
+                <span th:unless="${page.number == i}">
+                         <a th:href="@{/hotel/jxfz_serach(pageNumber=${i},startDate=${startDate},endDate=${endDate})}" th:id=${i+1}>[[${i}+1]]</a>
+                    </span>
+            </th:block>
+            <span th:if="${page.hasNext()}" class="next">
+                    <a th:href="@{/hotel/jxfz_serach(pageNumber=${page.number+1},startDate=${startDate},endDate=${endDate})}" id="next" onclick="f4()">下一页</a>
+                </span>
+            <div class="ui-flex-1"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+
+    var a = [[${startDate}]].split("-");
+    var b = [[${endDate}]].split("-");
+    show(a,b);
+    function show(dataBegin,dataEnd){
+        var type = [[${type}]];
+        $("#roomTypeSearch").val(type);
+        $("#yearBegin").val(dataBegin[0]);
+        $("#monthBegin").val(dataBegin[1]);
+        $("#dayBegin").val(dataBegin[2]);
+        $("#yearEnd").val(dataEnd[0]);
+        $("#monthEnd").val(dataEnd[1]);
+        $("#dayEnd").val(dataEnd[2]);
+    }
+
+</script>
+
+</html>

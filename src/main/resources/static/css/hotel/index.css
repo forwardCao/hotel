@@ -1,0 +1,305 @@
+body {
+  background-color: #f8f8f8;
+  padding: 0px;
+  color: #2a2a2a;
+}
+img {
+  width: 200px;
+  height: 130px;
+}
+header {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: url(../../images/index_01.jpg) repeat-x;
+}
+header .logo {
+  font-size: 18px;
+  color: #ffffff;
+  padding-left: 20px;
+}
+header .name {
+  margin-right: 10px;
+  cursor: pointer;
+}
+header .out {
+  margin-right: 60px;
+  cursor: pointer;
+}
+.layout {
+  width: 100%;
+  height: calc(100vh - 40px);
+}
+.layout .menu {
+  width: 130px;
+  margin-right: 10px;
+  background: #ffffff;
+  height: 100%;
+}
+.layout .menu li {
+  width: 130px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 16px;
+}
+.layout .menu li img {
+  width: 21px;
+  height: 21px;
+  vertical-align: middle;
+}
+.layout .menu li a {
+  display: block;
+  padding-left: 17px;
+  box-sizing: border-box;
+}
+.layout .menu li a:hover,
+.layout .menu li .ac {
+  background: #fab503;
+  color: #ffffff;
+}
+.layout .l_right {
+  background: #ffffff;
+  padding: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+.layout .l_right .search {
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  margin-bottom: 15px;
+}
+.layout .l_right .search input {
+  width: 260px;
+  height: 25px;
+  border: 1px solid #cbcbcb;
+  padding-left: 8px;
+  border-radius: 3px;
+  margin-right: 12px;
+}
+.layout .l_right .search button {
+  width: 60px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+  background: #fea901;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.layout .l_right .search button img {
+  width: 13px;
+  height: 13px;
+  vertical-align: middle;
+}
+.layout .l_right .home_tabs {
+  margin-bottom: 15px;
+}
+.layout .l_right .home_tabs .item {
+  height: 20px;
+  padding: 0 3px;
+  line-height: 20px;
+  border: 1px solid #e1e1e1;
+  color: #c4c4c4;
+  margin-right: 4px;
+  cursor: pointer;
+}
+.layout .l_right .home_tabs .item:hover,
+.layout .l_right .home_tabs .item.ac {
+  background: #ffebc0;
+  color: #867552;
+}
+.layout .l_right .rzqj_tabs {
+  width: 100%;
+  margin-top: 15px;
+  border-bottom: 1px solid #e8e8e8;
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 15px;
+}
+.layout .l_right .rzqj_tabs .item {
+  cursor: pointer;
+  margin-right: 20px;
+  color: #b3b3b3;
+  border-bottom: 1px solid #e8e8e8;
+}
+.layout .l_right .rzqj_tabs .item:hover,
+.layout .l_right .rzqj_tabs .item.ac {
+  color: #5e5e5e;
+  border-color: #e9d089;
+}
+.layout .l_right .mgr_180 {
+  margin-left: 180px;
+}
+.layout .l_right .s_slect {
+  margin-bottom: 10px;
+}
+.layout .l_right .s_slect input {
+  width: 90px;
+  height: 24px;
+  border: 1px solid #e5e5e5;
+  margin-right: 10px;
+}
+.layout .l_right .s_slect select {
+  width: 90px;
+  height: 26px;
+  border: 1px solid #e5e5e5;
+}
+.layout .l_right .s_slect button {
+  margin-right: 10px;
+}
+.layout .l_right .s_slect .text {
+  font-size: 24px;
+  color: #dfb01d;
+  margin-right: 40px;
+}
+.layout .l_right .table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  border: solid 1px #000;
+}
+.layout .l_right .table thead {
+  background: #ffebbf;
+}
+.layout .l_right .table tr {
+  height: 40px;
+  line-height: 40px;
+}
+.layout .l_right .table p {
+  color: #b6b6b6;
+}
+.layout .l_right .table td,
+.layout .l_right .table th {
+  text-align: center;
+  color: #2a2a2a;
+  border: 1px solid #cbcbcb;
+}
+.layout .l_right .table td img,
+.layout .l_right .table th img {
+  vertical-align: middle;
+}
+.layout .l_right .table td button,
+.layout .l_right .table th button {
+  width: 50px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.layout .l_right .table .shangjia {
+  background: #f8b703;
+}
+.layout .l_right .table .xiajia {
+  background: #fe020b;
+}
+.layout .l_right .table .shanchu {
+  background: #797979;
+}
+.layout .l_right .add {
+  height: 28px;
+  margin-top: 10px;
+}
+.layout .l_right .add span {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+.layout .l_right .pages {
+  line-height: 18px;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.layout .l_right .pages .next {
+  width: 50px;
+  height: 18px;
+  background: #ffeac0;
+  border: 1px solid #d8d4c9;
+  color: #63523c;
+  font-size: 12px;
+  margin: 0 5px;
+}
+.layout .l_right .pages ul li {
+  width: 18px;
+  height: 18px;
+  margin: 0 5px;
+}
+.layout .l_right .pages ul li a {
+  display: block;
+  color: #4d4d4d;
+}
+.layout .l_right .pages ul li a:hover,
+.layout .l_right .pages ul li a.ac {
+  background: #f9af10;
+  border-radius: 50%;
+  color: #ffffff;
+}
+.layout .l_right .items .item {
+  width: 20%;
+  height: 50px;
+  line-height: 25px;
+}
+.layout .l_right .items .item span {
+  color: #2e2e2e;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.layout .l_right .items .item font {
+  color: #828282;
+}
+.layout .l_right .items .item font img {
+  width: 15px;
+  height: 15px;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+.layout .l_right .items .item b {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffad0b;
+}
+.layout .l_right .items .item > button {
+  width: 98px;
+  height: 42px;
+  line-height: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.layout .l_right .items .item > button.btn1 {
+  background: #fea901;
+  margin-right: 20px;
+}
+.layout .l_right .items .item > button.btn2 {
+  background: #a3a3a3;
+}
+.layout .l_right .times {
+  height: 26px;
+  line-height: 26px;
+  margin: 15px 0;
+}
+.layout .l_right .times span {
+  color: #242424;
+  margin-right: 15px;
+  font-weight: bold;
+}
+.layout .l_right .times select {
+  cursor: pointer;
+  margin-right: 15px;
+}
+.layout .l_right .times button {
+  background: #feac02;
+  border-radius: 5px;
+  width: 60px;
+  height: 26px;
+  color: #ffffff;
+  cursor: pointer;
+}

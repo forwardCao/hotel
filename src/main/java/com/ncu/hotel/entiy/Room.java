@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,10 @@ import java.util.Set;
 @Entity
 @IdClass(RoomPk.class)
 public class Room implements Serializable {
+
+    @Id
+    @Temporal(TemporalType.DATE)
+    private Date date;
     @Id
     private char roomType;
     @Id
@@ -34,11 +39,20 @@ public class Room implements Serializable {
     @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "room",orphanRemoval = true)
     private Set<Sale> sales=new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "room",orphanRemoval = true)
     private Set<RoomDetail> roomDetails=new HashSet<>();
 
     @OneToMany(cascade=CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "room",orphanRemoval = true)
     private Set<Orders> orders=new HashSet<>();
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Set<Orders> getOrders() {
         return orders;

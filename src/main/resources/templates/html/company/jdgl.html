@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>公司端</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <script th:src="@{../../js/main.js}"></script>
+    <script th:src="@{../../js/jquery.min.js}"></script>
+    <script th:src="@{../../js/jquery1.min.js}"></script>
+    <script th:src="@{../../js/jquery-1.11.3.min.js}"></script>
+
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" th:href="@{../css/company/index.css}"/>
+    <link rel="stylesheet" th:href="@{../css/company/base.css}"/>
+    <link rel="stylesheet" th:href="@{../css/company/ui.css}"/>
+    <script th:inline="javascript">
+
+        var a = [[${hotel}]];
+
+        console.log(a);
+        function f1() {
+            var content = $("#number").val();
+            console.log(content);
+            var link ="/company/hotelSearch" + '?name='+content;
+            window.location.href=link;
+        }
+        function f() {
+            var num ="{";
+            num += jsonEncodeString("name",$("#number").val());
+            num +="}";
+            // console.log(num);
+            //
+            // var data = [[${hotel}]];
+            // console.log(data);
+            //
+            // var rooms=data.rooms;
+            //
+            // $.each(rooms, function (index, rooms){
+            //     console.log(rooms.sales);
+            // });
+
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/queryHS',
+                success :function(data) {
+                    console.log(data);
+                    alert("OK");
+                },
+                error :function(e) {
+                    alert(e);
+                }})
+        }
+
+        jsonEncodeString=function(label, value)
+        {
+            var tmpVal = "\""+label+"\"";
+            tmpVal += ":";
+            tmpVal +="\""+value+"\"";
+
+            return tmpVal;
+        };
+    </script>
+</head>
+<body>
+<header class="ui-flex">
+    <div class="logo">
+        盈希智慧酒店软件（公司端）
+    </div>
+    <div class="ui-flex-1"></div>
+    <div class="name">你好！管理员01</div>
+    <div class="out">退出</div>
+</header>
+
+<div class="layout ui-flex">
+    <ul class="menu">
+        <li>
+            <a href="hotelManagement" class="ac">
+                <img th:src="@{../../images/gsd_03.jpg}">
+                酒店管理
+            </a>
+        </li>
+        <li>
+            <a href="memberManagement">
+                <img th:src="@{../../images/gsd_10.jpg}">
+                会员管理
+            </a>
+        </li>
+        <li>
+            <a href="sumUp">
+                <img th:src="@{../../images/gsd_12.jpg}">
+                核算统计
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img th:src="@{../../images/gsd_14.jpg}">
+                税金发票
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img th:src="@{../../images/gsd_16.jpg}">
+                公    益
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img th:src="@{../../images/gsd_18.jpg}">
+                客服中心
+            </a>
+        </li>
+    </ul>
+
+    <div class="ui-flex-1 l_right">
+        <div class="search">
+            <input type="text" placeholder="酒店名称/品牌/星级/城市区域" id="number">
+            <button onclick="f1()">
+                <img th:src="@{../../images/gsd_06.jpg}">
+                搜索
+            </button>
+        </div>
+
+        <div class="ui-flex items">
+            <div class="item">
+                <span>酒店代码:</span><span th:text="${hotel.hotelID}">000</span>
+            </div>
+            <div class="item">
+                <span th:text="${hotel.hotelName}">北京天安酒店:</span><font><img src="../../images/star.jpg"><img src="../../images/star.jpg"><img src="../../images/star.jpg"><img src="../../images/star.jpg"><img src="../../images/star.jpg"></font>
+            </div>
+            <div class="item">
+                <span>地址:</span><span th:text="${hotel.address}">法大师傅十分是</span>
+            </div>
+            <div class="item">
+                <span>邮箱:</span><span th:text="${hotel.email}">5424124432@qq.com</span>
+            </div>
+            <div class="item">
+                <span>评价星级:</span><b th:text="${hotel.starLevel}">4.86</b>
+            </div>
+        </div>
+
+        <div class="ui-flex items">
+            <div class="item">
+                <span>负责人:</span><span th:text="${hotel.leader}">王皓</span>
+            </div>
+            <div class="item">
+                <span>座机:</span><span th:text="${hotel.Landline}">010-1258-7898</span>
+            </div>
+            <div class="item">
+                <span>微信:</span><span th:text="${hotel.wechat}">abc123</span>
+            </div>
+            <div class="item">
+                <span>手机:</span><span th:text="${hotel.tel}">14787878888</span>
+            </div>
+            <div class="item ui-flex">
+                <button class="btn1">上架通过</button>
+                <button class="btn2">强制下架</button>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th rowspan="2">房型</th>
+                <th rowspan="2" style="width: 200px">图片</th>
+                <th rowspan="2">上架间数</th>
+                <th colspan="2">普通价格</th>
+                <th colspan="2">会员团体价</th>
+                <th colspan="4">增值服务价格(n表示次数)</th>
+                <th rowspan="2" style="width: 200px">证件反面照片</th>
+                <th rowspan="2">佣金</th>
+                <th rowspan="2">其他</th>
+            </tr>
+            <tr>
+                <th>普价</th>
+                <th>普价税金</th>
+                <th>团价</th>
+                <th>团价税金</th>
+                <th>生日房(n)</th>
+                <th>求婚房(n)</th>
+                <th>婚房(n)</th>
+                <th>其他(n)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room:${hotel.rooms}">
+                <td>
+                    <li th:if="${room.roomType} eq 'a'">大床房</li>
+                    <li th:if="${room.roomType} eq 'b'">豪华大床房</li>
+                    <li th:if="${room.roomType} eq 'c'">双床</li>
+                    <li th:if="${room.roomType} eq 'd'">精品双床</li>
+                    <li th:if="${room.roomType} eq 'e'">套房</li>
+                    <li th:if="${room.roomType} eq 'f'">豪华套房</li>
+                    <li th:if="${room.roomType} eq 'g'">连通房</li>
+                    <li th:if="${room.roomType} eq 'h'">无烟客房</li>
+                    <li th:if="${room.roomType} eq 'i'">残疾人客房</li>
+                    <li th:if="${room.roomType} eq 'g'">可加床房</li>
+                    <li th:if="${room.roomType} eq 'k'">特惠房</li>
+                    <li th:if="${room.roomType} eq 'l'">其他</li>
+                </td>
+                <td><img th:src="@{${room.photo}}"/></td>
+                <td th:text="${room.quantity}"></td>
+                <td th:text="${room.generalPrice}"></td>
+                <td th:text="${room.generalTax}"></td>
+                <td th:text="${room.groupPrice}"></td>
+                <td th:text="${room.groupTax}"></td>
+                <td th:each="sale:${room.sales}">
+                    <span th:text="${sale.birthdayPrice}">100（12）</span>
+                    (<span th:text="${sale.birthdayRoomSum}">100（12）</span>)
+                </td>
+                <td th:each="sale:${room.sales}">
+                    <span th:text="${sale.proposePrice}">100（12）</span>
+                    (<span th:text="${sale.proposeRoomSum}">100（12）</span>)
+                </td>
+                <td th:each="sale:${room.sales}">
+                    <span th:text="${sale.marriedPrice}">100（12）</span>
+                    (<span th:text="${sale.marriedSum}">100（12）</span>)
+                </td>
+                <td th:each="sale:${room.sales}">
+                    <span th:text="${sale.otherPrice}">100（12）</span>
+                   (<span th:text="${sale.otherRoomSum}">100（12）</span>)
+                </td>
+                <td><img th:src="@{${room.photo}}"/></td>
+                <td th:each="sale:${room.sales}">
+                    <div th:text="${sale.commission}">100（12）</div>
+                </td>
+                <td th:each="sale:${room.sales}">
+                    <div th:text="${sale.note}">100（12）</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

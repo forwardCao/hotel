@@ -30,12 +30,9 @@ public class Server {
     private int ID;
     private int workID;
 
-    @JsonIgnore
     @ManyToOne
     private Accommodation accommodation;
-
-
-    @OneToOne
+    @ManyToOne
     private  Staff staff;
 
     public int getSatisfaction() {

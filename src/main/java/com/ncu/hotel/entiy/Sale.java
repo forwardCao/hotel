@@ -15,6 +15,10 @@ import java.util.Date;
 @Entity
 @IdClass(SalePk.class)
 public class Sale implements Serializable {
+
+    @Id
+    @Temporal(TemporalType.DATE)
+    private Date date;
     @Id
     private char roomType;
     @Id
@@ -27,12 +31,12 @@ public class Sale implements Serializable {
     private int marriedSum;
     private int otherRoomSum;
     private int commission;
+    private String note;
     private double birthdayPrice;
     private double proposePrice;
     private double marriedPrice;
     private double otherPrice;
-    @Temporal(TemporalType.DATE)
-    private Date date;
+
 
     @JsonIgnore
     @ManyToOne
@@ -48,6 +52,14 @@ public class Sale implements Serializable {
 
     public Room getRoom() {
         return room;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public void setRoom(Room room) {

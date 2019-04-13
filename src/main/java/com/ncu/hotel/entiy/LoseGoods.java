@@ -8,13 +8,16 @@ import java.util.Date;
  */
 @Entity
 public class LoseGoods {
-    @Id
-    @Temporal(TemporalType.DATE)
-    private Date date;
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int loseGoodsID;
+
+    private String date;
     private String dispose;
     private String worker;
     private String disposeWorker;
+    private String losePhoto;
     private byte result;
     private int roomNumber;
     private int memberId;
@@ -25,8 +28,24 @@ public class LoseGoods {
     @ManyToOne
     private Member member;
 
+    public String getLosePhoto() {
+        return losePhoto;
+    }
+
+    public void setLosePhoto(String losePhoto) {
+        this.losePhoto = losePhoto;
+    }
+
     public int getRoomNumber() {
         return roomNumber;
+    }
+
+    public int getLoseGoodsID() {
+        return loseGoodsID;
+    }
+
+    public void setLoseGoodsID(int loseGoodsID) {
+        this.loseGoodsID = loseGoodsID;
     }
 
     public void setRoomNumber(int roomNumber) {
@@ -41,11 +60,11 @@ public class LoseGoods {
         this.memberId = memberId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

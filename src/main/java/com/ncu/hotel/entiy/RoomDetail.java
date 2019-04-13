@@ -22,15 +22,15 @@ public class RoomDetail {
     private char roomType;
     private int hotelID;
 
-    @JsonIgnore
     @ManyToOne
     private Room room;
 
+    @JsonIgnore
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
     private Set<Accommodation> accommodations=new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
+    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member",orphanRemoval = true)
     private Set<LoseGoods> loseGoods=new HashSet<>();
 
     public byte getFlag() {

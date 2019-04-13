@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店端</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/index.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/base.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/ui.css}"/>
+    <script th:src="@{../../js/main.js}"></script>
+    <script th:src="@{../../js/jquery.min.js}"></script>
+    <script th:src="@{../../js/jquery1.min.js}"></script>
+    <script th:src="@{../../js/jquery-1.11.3.min.js}"></script>
+    <script th:inline="javascript">
+        function f1(id) {
+            $(".item").removeClass("ac");
+            if(id == '1') $("#a").addClass("ac");
+            else if(id == '0') $("#b").addClass("ac");
+            else if(id == '2') $("#c").addClass("ac");
+
+            var link ="/hotel/restGoodsClick" + '?pageNumber='+0+ '&result='+parseInt(id);
+            window.location.href=link;
+
+
+            // $.ajax({
+            //     type:'post',
+            //     data:num,
+            //     contentType :'application/json;charset=UTF-8',
+            //     dataType:'json',
+            //     url :'/test/queryLoseFinish',
+            //     success :function(data) {
+            //         console.log(data);
+            //         $("#loseGoodsList").empty();
+            //         $.each(data, function (index, data) {
+            //             $("#loseGoodsList").append("<tr id = " + data.loseGoodsID + "></tr>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.roomNumber + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.memberId + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.member.name + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.member.certificateType + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.member.certificateNumber + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.date + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.dispose + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.worker + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.disposeWorker + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td>" + data.result + "</td>>");
+            //             $("#" + data.loseGoodsID).append("<td></td>>");
+            //         })
+            //     },
+            //     error :function(e) {
+            //         alert(e);
+            //     }})
+
+        }
+        function f() {
+            var num ="{";
+            num += jsonEncodeString("name",$("#number").val());
+            num +="}";
+            // console.log(num);
+
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/queryLGS',
+                success :function(data) {
+                    var temp;
+                    $("#loseGoodsList").empty();
+                    $.each(data, function (index, data) {
+                        $("#loseGoodsList").append("<tr id = " + data.loseGoodsID + "></tr>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.roomNumber + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.memberId + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.member.name + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.member.certificateType + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.member.certificateNumber + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.date + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.dispose + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.worker + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td>" + data.disposeWorker + "</td>>");
+                        if(data.result == 0) {
+                            temp = '未完成';
+                        }
+                        else if (data.result == 1){
+                            temp = '已完成';
+                        }
+                        else{
+                            temp = '争议件';
+                        }
+                        $("#" + data.loseGoodsID).append("<td>" + temp + "</td>>");
+                        $("#" + data.loseGoodsID).append("<td><img" + " src=" + data.losePhoto + "/>" + "</td>>");
+                    })
+                },
+                error :function(e) {
+                    console.log(e);
+                    alert(e);
+                }})
+        }
+        jsonEncodeString=function(label, value)
+        {
+            var tmpVal = "\""+label+"\"";
+            tmpVal += ":";
+            tmpVal +="\""+value+"\"";
+
+            return tmpVal;
+        };
+    </script>
+</head>
+<body>
+    <header class="ui-flex">
+        <dov class="logo">
+            盈希智慧酒店软件（酒店端）
+        </dov>
+        <div class="ui-flex-1"></div>
+        <div class="name">你好！管理员01</div>
+        <div class="out">退出</div>
+    </header>
+
+    <div class="layout ui-flex">
+        <ul class="menu">
+            <li>
+                <a href="roomManagement">
+                    <img src="../../images/index_05.jpg">
+                    客房管理
+                </a>
+            </li>
+            <li>
+                <a href="checkInPeroid">
+                    <img src="../../images/index_12.jpg">
+                    入住期间
+                </a>
+            </li>
+            <li>
+                <a href="restGoods" class="ac">
+                    <img src="../../images/index_14.jpg">
+                    遗留物品
+                </a>
+            </li>
+            <li>
+                <a href="feeSumUp">
+                    <img src="../../images/index_19.jpg">
+                    房费统计
+                </a>
+            </li>
+            <li>
+                <a href="feedbackManagement">
+                    <img src="../../images/index_22.jpg">
+                    评价管理
+                </a>
+            </li>
+            <li>
+                <a href="performanceScore">
+                    <img src="../../images/index_24.jpg">
+                    绩效分值
+                </a>
+            </li>
+        </ul>
+
+        <div class="ui-flex-1 l_right">
+            <div class="search">
+                <input type="text" placeholder="会员号/退房日期/房间号/入住人姓名" id="number">
+                <button onclick="f()">
+                    <img src="../../images/index_08.jpg">
+                    搜索
+                </button>
+            </div>
+
+            <div class="rzqj_tabs ui-flex">
+                <div id="1" class="item ac" onclick="f1(this.id)">
+                    全部(<span th:text="${all}">4</span>)
+                </div>
+                <div id="0" class="item" onclick="f1(this.id)">
+                    处理未完成(<span th:text="${notFinsh}">4</span>)
+                </div>
+                <div id="2" class="item" onclick="f1(this.id)">
+                    争议件(<span th:text="${zhenYi}">4</span>)
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>房间号</th>
+                        <th>会员号</th>
+                        <th>入住人</th>
+                        <th>证件类型</th>
+                        <th>证件号</th>
+                        <th>退房日期</th>
+                        <th>物品处理方式</th>
+                        <th>服务员</th>
+                        <th>物品处理负责人</th>
+                        <th>处理结果</th>
+                        <th style="width: 200px;">物品图片</th>
+                    </tr>
+                </thead>
+                <tbody id="loseGoodsList">
+                    <tr th:each="losegoods:${page.content}">
+                        <td th:text="${losegoods.roomNumber}">401</td>
+                        <td th:text="${losegoods.memberId}">688</td>
+                        <td th:text="${losegoods.member.name}">张三</td>
+                        <td th:text="${losegoods.member.certificateType}">身份证</td>
+                        <td th:text="${losegoods.member.certificateNumber}">370101112122125225</td>
+                        <td th:text="${losegoods.date}">2018.2.2</td>
+                        <td th:text="${losegoods.dispose}">自取</td>
+                        <td th:text="${losegoods.worker}">张三</td>
+                        <td th:text="${losegoods.disposeWorker}">张三</td>
+                        <td th:if="${losegoods.result} eq '1'">已处理</td>
+                        <td th:if="${losegoods.result} eq '0'">未处理</td>
+                        <td th:if="${losegoods.result} eq '2'">争议件</td>
+                        <td><img th:src="@{${losegoods.losePhoto}}"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div class="pages ui-flex">
+                <!--<div class="ui-flex-1"></div>-->
+                <!--<div class="next">上一页</div>-->
+                <!--<ul class="ui-flex">-->
+                    <!--<li><a href="#" class="ac">1</a></li>-->
+                    <!--<li><a href="#">2</a></li>-->
+                    <!--<li><a href="#">3</a></li>-->
+                    <!--<li><a href="#">4</a></li>-->
+                    <!--<li><a href="#">5</a></li>-->
+                    <!--<li><a href="#">6</a></li>-->
+                    <!--<li><a href="#">...</a></li>-->
+                    <!--<li><a href="#">10</a></li>-->
+                <!--</ul>-->
+                <!--<div class="next">下一页</div>-->
+                <!--<div class="ui-flex-1"></div>-->
+                <div class="ui-flex-1"></div>
+                <span th:if="${page.hasPrevious()}">
+                    <a th:href="@{/hotel/restGoods(page=${page.number-1},size=${page.size})}">上一页</a>
+                </span>
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                    <span th:unless="${page.number == i}">
+                         <a th:href="@{/hotel/restGoods(page=${i},size=${page.size})}">[[${i}+1]]</a>
+                    </span>
+                </th:block>
+                <span th:if="${page.hasNext()}">
+                    <a th:href="@{/hotel/restGoods(page=${page.number+1},size=${page.size})}">下一页</a>
+                </span>
+                <div class="ui-flex-1"></div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

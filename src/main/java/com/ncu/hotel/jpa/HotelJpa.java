@@ -10,4 +10,5 @@ import java.io.Serializable;
  * Created bt caoqianfeng on 2019/2/26
  */
 public interface HotelJpa extends JpaRepository<Hotel, Integer>, JpaSpecificationExecutor<Hotel>, Serializable {
+    Hotel findByHotelNameOrBrandOrAddress(String name,String brand,String address);
 }

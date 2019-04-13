@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 public class Member {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int memberId;
 
     private String name;
@@ -28,7 +28,8 @@ public class Member {
     private String certificateFrontPhoto;
     private String certificateReversePhoto;
     private int credit;
-
+    private byte flag;
+    @JsonIgnore
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
     private Set<Accommodation> accommodations=new HashSet<>();
 
@@ -38,6 +39,14 @@ public class Member {
 
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
     private Set<Orders> orders=new HashSet<>();
+
+    public byte getFlag() {
+        return flag;
+    }
+
+    public void setFlag(byte flag) {
+        this.flag = flag;
+    }
 
     public Set<Orders> getOrders() {
         return orders;

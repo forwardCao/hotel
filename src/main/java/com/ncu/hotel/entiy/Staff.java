@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created bt caoqianfeng on 2019/2/26
@@ -23,10 +25,10 @@ public class Staff {
     @ManyToOne
     Hotel hotel;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "staff")
-    private Server server;
 
+    @JsonIgnore
+    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "staff")
+    private Set<Server> servers=new HashSet<>();
 
     public int getHotelID() {
         return hotelID;
@@ -36,12 +38,12 @@ public class Staff {
         this.hotelID = hotelID;
     }
 
-    public Server getServer() {
-        return server;
+    public Set<Server> getServers() {
+        return servers;
     }
 
-    public void setServer(Server server) {
-        this.server = server;
+    public void setServers(Set<Server> servers) {
+        this.servers = servers;
     }
 
     public int getWorkID() {

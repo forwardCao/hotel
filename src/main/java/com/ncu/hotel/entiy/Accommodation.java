@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 public class Accommodation {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int ID;
 
     @Temporal(TemporalType.DATE)
@@ -26,16 +26,20 @@ public class Accommodation {
     private String damagePhoto;
     private double commission;
     private double tax;
+    private double addPrice;
     private int memberId;
     private int roomNumber;
+    private Date evaluateDate;
+    private int toCustomerStar;
+    private String toCustomerEvaluate;
 
-    @JsonIgnore
+
     @ManyToOne
     private RoomDetail roomDetail ;
-    @JsonIgnore
     @ManyToOne
     private Member member;
 
+    @JsonIgnore
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "accommodation")
     private Set<Server> servers=new HashSet<>();
 
@@ -141,5 +145,33 @@ public class Accommodation {
 
     public void setServers(Set<Server> servers) {
         this.servers = servers;
+    }
+
+    public double getAddPrice() { return addPrice; }
+
+    public void setAddPrice(double addPrice) { this.addPrice = addPrice; }
+
+    public Date getEvaluateDate() {
+        return evaluateDate;
+    }
+
+    public void setEvaluateDate(Date evaluateDate) {
+        this.evaluateDate = evaluateDate;
+    }
+
+    public int getToCustomerStar() {
+        return toCustomerStar;
+    }
+
+    public void setToCustomerStar(int toCustomerStar) {
+        this.toCustomerStar = toCustomerStar;
+    }
+
+    public String getToCustomerEvaluate() {
+        return toCustomerEvaluate;
+    }
+
+    public void setToCustomerEvaluate(String toCustomerEvaluate) {
+        this.toCustomerEvaluate = toCustomerEvaluate;
     }
 }

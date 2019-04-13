@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,4 +22,7 @@ public interface SaleJpa extends JpaRepository<Sale, SalePk>, JpaSpecificationEx
     @Transactional
     @Query("delete from Sale u where u.hotelID = ?1 and u.roomType=?2")
     void deleteByHotelIDAndRoomType(int id,char type);
+
+
+    List<Sale> findByDateBetween(Date start,Date end);
 }

@@ -1,6 +1,7 @@
 package com.ncu.hotel.entiy;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Objects;
 public class RoomPk implements Serializable {
     private char roomType;
     private int hotelID;
-
+    private Date date;
     public RoomPk(){}
 
     public RoomPk(char roomType, int hotelID) {
@@ -33,6 +34,14 @@ public class RoomPk implements Serializable {
         this.hotelID = hotelID;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,13 +50,15 @@ public class RoomPk implements Serializable {
         RoomPk roomPk = (RoomPk) o;
 
         if (roomType != roomPk.roomType) return false;
-        return hotelID == roomPk.hotelID;
+        if (hotelID != roomPk.hotelID) return false;
+        return date.equals(roomPk.date);
     }
 
     @Override
     public int hashCode() {
         int result = (int) roomType;
         result = 31 * result + hotelID;
+        result = 31 * result + date.hashCode();
         return result;
     }
 }

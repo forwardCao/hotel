@@ -1,0 +1,296 @@
+body {
+  background: #f8f8f8;
+  color: #787878;
+  font-size: 0.24rem;
+}
+img {
+  width: 40%;
+}
+button {
+  border: 0;
+  outline: 0;
+  color: #ffffff;
+  font-weight: bold;
+}
+header {
+  height: 1rem;
+  width: 100%;
+  background: #ffb034;
+  line-height: 1rem;
+  text-align: center;
+  font-size: 0.36rem;
+  color: #ffffff;
+}
+.i_top {
+  height: 1.5rem;
+  background-color: #ffffff;
+  padding: 0.26rem 0.32rem;
+  box-sizing: border-box;
+}
+.i_top .pic {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.33rem;
+}
+.i_top .name {
+  color: #000000;
+}
+.i_top .name h3 {
+  height: 0.5rem;
+  line-height: 0.5rem;
+  font-weight: bold;
+  font-size: 0.3rem;
+}
+.i_top .name p {
+  height: 0.4rem;
+  line-height: 0.4rem;
+}
+.i_top .position {
+  width: 1.2rem;
+  text-align: center;
+  margin-right: 0.6rem;
+}
+.i_top .position span {
+  line-height: 0.5rem;
+}
+.i_top .position font {
+  width: 1.2rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  border: 1px solid #ffb034;
+  border-radius: 0.05rem;
+  color: #ffb034;
+  display: block;
+}
+.homes {
+  margin-top: 0.2rem;
+  padding: 0.2rem 0.32rem;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+.homes h3 {
+  line-height: 0.5rem;
+  height: 0.5rem;
+  font-size: 0.28rem;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 0.1rem;
+}
+.homes > div {
+  padding-left: 0.5rem;
+  line-height: 0.5rem;
+  margin: 0.05rem 0;
+}
+.homes > div .project {
+  width: 0.95rem;
+}
+.homes > div .item {
+  width: 1.5rem;
+  margin-right: 0.8rem;
+}
+.homes > div button {
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0 0.2rem;
+  border-radius: 0.1rem;
+  border: 0;
+  outline: 0;
+  color: #ffffff;
+  font-weight: bold;
+}
+.homes > div font {
+  color: #ff3434;
+  font-weight: bold;
+  margin: 0 0.03rem;
+}
+footer {
+  height: 1rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #ffffff;
+  padding-top: 0.15rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+footer dl dt {
+  width: 0.45rem;
+  height: 0.45rem;
+  margin: 0 auto;
+}
+footer dl dt img:nth-of-type(2) {
+  display: none;
+}
+footer dl dd {
+  line-height: 0.35rem;
+  color: #acacac;
+}
+footer dl.ac dt img:nth-of-type(1) {
+  display: none;
+}
+footer dl.ac dt img:nth-of-type(2) {
+  display: block;
+}
+footer dl.ac dd {
+  color: #ffb034;
+}
+.yingda {
+  background: #ffb034;
+}
+.wancheng {
+  background: #ff3434;
+}
+.qingsao {
+  background: #38ce28;
+}
+.cf_cont {
+  margin-bottom: 1rem;
+  padding: 0.26rem;
+  background: #ffffff;
+}
+.cf_cont h3 {
+  font-size: 0.28rem;
+  font-weight: bold;
+  color: #000000;
+  line-height: 0.5rem;
+}
+.cf_cont select {
+  width: 2rem;
+  height: 0.56rem;
+  line-height: 0.56rem;
+  border: 1px solid #a9a9a9;
+  text-align: center;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+.cf_cont select option {
+  font-size: 0.24rem;
+}
+.cf_cont .top_upload {
+  margin-top: 0.15rem;
+  width: 100%;
+  height: 3.8rem;
+  border: 1px solid #a9a9a9;
+  text-align: center;
+}
+.cf_cont .top_upload img {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 1.1rem;
+}
+.cf_cont h4 {
+  font-size: 0.26rem;
+  color: #000000;
+  line-height: 0.4rem;
+  margin-top: 0.1rem;
+  padding-left: 0.3rem;
+}
+.cf_cont .bottom_btn {
+  margin-top: 0.28rem;
+  line-height: 0.56rem;
+}
+.cf_cont button {
+  width: 1.85rem;
+  height: 0.56rem;
+  line-height: 0.56rem;
+  text-align: center;
+  margin-left: 2.3rem;
+  background: #ff3434;
+  border-radius: 0.1rem;
+  margin-right: 0.3rem;
+}
+.cf_cont font {
+  color: #ff3434;
+}
+.grzx {
+  margin-top: 0.6rem;
+}
+.grzx button {
+  padding: 0 0.4rem;
+  height: 0.76rem;
+  text-align: center;
+  border-radius: 0.1rem;
+}
+.zc_cont {
+  padding-bottom: 0.3rem;
+  background: #ffffff;
+  margin-top: 0.2rem;
+  width: 100%;
+}
+.zc_cont .ui-flex {
+  height: 0.5rem;
+  line-height: 0.5rem;
+  width: 100%;
+  margin: 0.2rem 0;
+}
+.zc_cont .ui-flex .item {
+  width: 2.3rem;
+  color: #000000;
+  font-weight: bold;
+  font-size: 0.28rem;
+  text-align: right;
+  margin-right: 0.3rem;
+}
+.zc_cont .ui-flex input {
+  border-radius: 0.05rem;
+  border: 1px solid #d7d7d7;
+  height: 0.5rem;
+  width: 4.4rem;
+}
+.search {
+  padding-top: 0.2rem;
+  background: #ffffff;
+  padding-left: 0.05rem;
+  padding-right: 0.05rem;
+}
+.search input {
+  width: 0.6rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  border: 1px solid #e1e1e1;
+  border-radius: 0.05rem;
+}
+.search img {
+  width: 0.37rem;
+  height: 0.38rem;
+}
+.search_items {
+  margin-top: 0.2rem;
+  background: #ffffff;
+  padding: 0.2rem 0.25rem;
+  color: #b4b4b4;
+  font-size: 0.26rem;
+}
+.search_items .title {
+  width: 3rem;
+  height: 0.45rem;
+  line-height: 0.45rem;
+  color: #000000;
+  font-weight: bold;
+}
+.search_items .title input {
+  width: 0.9rem;
+  height: 0.45rem;
+  border: 1px solid #dedede;
+  border-radius: 0.1rem;
+  margin-left: 0.05rem;
+}
+.search_items .top_title {
+  line-height: 0.5rem;
+}
+.search_items .top_title h3 {
+  font-weight: bold;
+  color: #000000;
+  font-size: 0.26rem;
+  margin-right: 0.8rem;
+}
+.search_items .ui-flex {
+  margin: 0.1rem 0;
+}
+.search_items .s_items span {
+  width: 25%;
+}
+.search_items .items > span {
+  width: 25%;
+}

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,4 +14,6 @@ import java.util.List;
  */
 public interface RoomJpa extends JpaRepository<Room, RoomPk> , JpaSpecificationExecutor<Room>,Serializable {
     Room findByHotelIDAndAndRoomType(int id,char type);
+    List<Room> findByHotelID(int hotelId);
+    List<Room> findByHotelIDAndDateBetween(int hotelId, Date start,Date end);
 }

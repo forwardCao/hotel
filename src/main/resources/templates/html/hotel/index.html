@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>酒店端</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/index.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/base.css}"/>
+    <link rel="stylesheet" th:href="@{../../css/hotel/ui.css}"/>
+    <script th:src="@{../../js/main.js}"></script>
+    <script th:src="@{../../js/jquery.min.js}"></script>
+    <script th:src="@{../../js/jquery1.min.js}"></script>
+    <script th:src="@{../../js/jquery-1.11.3.min.js}"></script>
+    <script th:inline="javascript">
+        function f3(id) {
+            var num ="{";
+            num += jsonEncodeString("roomID",id);
+            num +="}";
+            console.log(num);
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/delRoom',
+                success :function(data) {
+                    alert("OK");
+                },
+                error :function(e) {
+                    alert(e);
+                }})
+        }
+        function f2(id,className) {
+            var num ="{";
+            num += jsonEncodeString("roomID",id)+",";
+            if (className == "shangjia") {
+                num += jsonEncodeString("flag",1);
+            }
+            else {
+                num += jsonEncodeString("flag",0);
+            }
+            num +="}";
+            console.log(num);
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/setRoom',
+                success :function(data) {
+                    alert("OK");
+                },
+                error :function(e) {
+                    alert(e);
+                }})
+        }
+        function f1(id) {
+            $(".item").removeClass("ac");
+            if(id == 'a') $("#a").addClass("ac");
+            else if(id == 'b') $("#b").addClass("ac");
+            else if(id == 'c') $("#c").addClass("ac");
+            else if(id == 'd') $("#d").addClass("ac");
+            else if(id == 'e') $("#e").addClass("ac");
+            else if(id == 'f') $("#f").addClass("ac");
+            else if(id == 'g') $("#g").addClass("ac");
+            else if(id == 'h') $("#h").addClass("ac");
+            else if(id == 'i') $("#i").addClass("ac");
+            else if(id == 'j') $("#j").addClass("ac");
+            else if(id == 'k') $("#k").addClass("ac");
+            else if(id == 'l') $("#l").addClass("ac");
+            var num ="{";
+            num += jsonEncodeString("name",id);
+            num +="}";
+            console.log(num);
+            var link ="/hotel/roomSearchByType" + '?pageNumber='+0 + '&type=' + id;
+            window.location.href=link;
+
+            // $.ajax({
+            //     type:'post',
+            //     data:num,
+            //     contentType :'application/json;charset=UTF-8',
+            //     dataType:'json',
+            //     url :'/test/queryRSType',
+            //     success :function(data) {
+            //         $("#roomList").empty();
+            //         $.each(data, function (index, data) {
+            //             $("#roomList").append("<tr id = " + data.roomNumber + "></tr>");
+            //             $("#" + data.roomNumber).append("<td rowspan='1'> <img src='../../images/index_17.jpg'> <p>点击上传图片</p> </td>");
+            //             $("#" + data.roomNumber).append("<td>" + data.roomNumber + "</td>>");
+            //             $("#" + data.roomNumber).append("<td>" + data.flag + "</td>>");
+            //             $("#" + data.roomNumber).append("<td>" + data.room.generalPrice + "</td>>");
+            //             $("#" + data.roomNumber).append("<td>" + data.room.groupPrice + "</td>>");
+            //             if(data.window == 1) {
+            //                 $("#" + data.roomNumber).append("<td>" + "有窗" + "</td>>");
+            //             }
+            //             else{
+            //                 $("#" + data.roomNumber).append("<td>" + "无窗" + "</td>>");
+            //             }
+            //
+            //             if(data.windowOrientation == 1) {
+            //                 $("#" + data.roomNumber).append("<td>" + "朝内" + "</td>>");
+            //             }
+            //             else{
+            //                 $("#" + data.roomNumber).append("<td>" + "朝外" + "</td>>");
+            //             }
+            //             if(data.wifi == 1){
+            //                 $("#" + data.roomNumber).append("<td>" + "有" + "</td>>");
+            //             }
+            //             else {
+            //                 $("#" + data.roomNumber).append("<td>" + "无" + "</td>>");
+            //             }
+            //             $("#" + data.roomNumber).append("<td>" + "<select id='character'>" +
+            //                 "<option value='操作一' th:selected=\"${character=='操作一'}\">操作一</option>" +
+            //                 "<option value='操作二' th:selected=\"${character=='操作二'}\">操作二</option>" +
+            //                 "<option value='操作三' th:selected=\"${character=='操作三'}\">操作三</option></select></td>>");
+            //             $("#" + data.roomNumber).append("<td>" + "<button class='shangjia' " + "id= " + data.roomNumber + " onclick=\"f2(this.id,this.className)\"> 上架 </button> " +
+            //                 "<button class='xiajia' " + "id= " + data.roomNumber + " onclick=\"f2(this.id,this.className)\"> 下架 </button> " +
+            //                 "<button class='shanchu' " + "id= " + data.roomNumber + " onclick=\"f3(this.id)\"> 删除 </button> " + "</td>>");
+            //         })
+            //
+            //     },
+            //     error :function(e) {
+            //         alert(e);
+            //     }})
+
+        }
+        function f() {
+            var num ="{";
+            num += jsonEncodeString("name",$("#number").val());
+            num +="}";
+            console.log(num);
+
+            $.ajax({
+                type:'post',
+                data:num,
+                contentType :'application/json;charset=UTF-8',
+                dataType:'json',
+                url :'/test/queryRS',
+                success :function(data) {
+                    $("#roomList").empty();
+                    $("#roomList").append("<tr id = " + data.roomNumber + "></tr>");
+                    $("#" + data.roomNumber).append("<td><img" + " src=" + data.room.photo + "/>" + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.roomNumber + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.flag + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.room.generalPrice + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.room.groupPrice + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.window + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.windowOrientation + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.wifi + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + data.feacture + "</td>>");
+                    $("#" + data.roomNumber).append("<td>" + "<button class='shangjia' th:id=\"${roomDetail.roomNumber}\" onclick=\"f2(this.id,this.className)\"> 上架 </button> " +
+                        "<button class='xiajia'> 下架 </button> <button class='shanchu'> 删除 </button>" + "</td>>");
+                },
+                error :function(e) {
+                    alert(e);
+                }})
+        }
+
+        jsonEncodeString=function(label, value)
+        {
+            var tmpVal = "\""+label+"\"";
+            tmpVal += ":";
+            tmpVal +="\""+value+"\"";
+
+            return tmpVal;
+        };
+    </script>
+</head>
+<body>
+    <header class="ui-flex">
+        <dov class="logo">
+            盈希智慧酒店软件（酒店端）
+        </dov>
+        <div class="ui-flex-1"></div>
+        <div class="name">你好！管理员01</div>
+        <div class="out">退出</div>
+    </header>
+
+    <div class="layout ui-flex">
+        <ul class="menu">
+            <li>
+                <a href="roomManagement" class="ac">
+                    <img src="../../images/index_05.jpg">
+                    客房管理
+                </a>
+            </li>
+            <li>
+                <a href="checkInPeroid">
+                    <img src="../../images/index_12.jpg">
+                    入住期间
+                </a>
+            </li>
+            <li>
+                <a href="restGoods">
+                    <img src="../../images/index_14.jpg">
+                    遗留物品
+                </a>
+            </li>
+            <li>
+                <a href="feeSumUp">
+                    <img src="../../images/index_19.jpg">
+                    房费统计
+                </a>
+            </li>
+            <li>
+                <a href="feedbackManagement">
+                    <img src="../../images/index_22.jpg">
+                    评价管理
+                </a>
+            </li>
+            <li>
+                <a href="performanceScore">
+                    <img src="../../images/index_24.jpg">
+                    绩效分值
+                </a>
+            </li>
+        </ul>
+
+        <div class="ui-flex-1 l_right">
+            <div class="search">
+                <input type="text" placeholder="请输入房间号" id="number">
+                <button onclick="f()">
+                    <img src="../../images/index_08.jpg">
+                    搜索
+                </button>
+            </div>
+
+            <div class="home_tabs ui-flex">
+                <div id ="a" class="item ac" onclick="f1(this.id)">
+                    大床房(<span th:text="${a}">4</span>间)
+                </div>
+                <div id ="b" class="item" onclick="f1(this.id)">
+                    豪华大床房(<span th:text="${b}">4</span>间)
+                </div>
+                <div id ="c" class="item" onclick="f1(this.id)">
+                    双床(<span th:text="${c}">4</span>间)
+                </div>
+                <div id ="d" class="item" onclick="f1(this.id)">
+                    精品双床(<span th:text="${d}">4</span>间)
+                </div>
+                <div id ="e" class="item" onclick="f1(this.id)">
+                    套房(<span th:text="${e}">4</span>间)
+                </div>
+                <div id ="f" class="item" onclick="f1(this.id)">
+                    豪华套房(<span th:text="${f}">4</span>间)
+                </div>
+                <div id ="g" class="item" onclick="f1(this.id)">
+                    连通房(<span th:text="${g}">4</span>间)
+                </div>
+                <div id ="h" class="item" onclick="f1(this.id)">
+                    无烟客房(<span th:text="${h}">4</span>间)
+                </div>
+                <div id ="i" class="item" onclick="f1(this.id)">
+                    残疾人客房(<span th:text="${i}">4</span>间)
+                </div>
+                <div id ="j" class="item" onclick="f1(this.id)">
+                    可加床房(<span th:text="${j}">4</span>间)
+                </div>
+                <div id ="k" class="item" onclick="f1(this.id)">
+                    特惠房(<span th:text="${k}">4</span>间)
+                </div>
+                <div id ="l" class="item" onclick="f1(this.id)">
+                    其他(<span th:text="${l}">4</span>间)
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">大床房图片</th>
+                        <th>房间号</th>
+                        <th>楼层</th>
+                        <th>普通价格</th>
+                        <th>会议团体价</th>
+                        <th>有无窗</th>
+                        <th>窗朝向</th>
+                        <th>无线网</th>
+                        <th>特点</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="roomList">
+                    <tr th:each="roomDetail:${page.content}">
+                        <td><img th:src="@{${roomDetail.room.photo}}"/></td>
+                        <td th:text="${roomDetail.roomNumber}">4</td>
+                        <td th:text="${roomDetail.flag}">张三</td>
+                        <td th:text="${roomDetail.room.generalPrice}">588</td>
+                        <td th:text="${roomDetail.room.groupPrice}">488</td>
+                        <td>
+                            <li th:if="${roomDetail.window==1}">有</li>
+                            <li th:if="${roomDetail.window==0}">无</li>
+                        </td>
+                        <td th:text="${roomDetail.windowOrientation}">张三</td>
+                        <td>
+                            <li th:if="${roomDetail.wifi==1}">有</li>
+                            <li th:if="${roomDetail.wifi==0}">无</li>
+                        </td>
+                        <td th:text="${roomDetail.feacture}">张三</td>
+                        <td id="operation">
+                            <button class="shangjia" th:id="${roomDetail.roomNumber}" onclick="f2(this.id,this.className)">
+                                上架
+                            </button>
+                            <button class="xiajia" th:id="${roomDetail.roomNumber}" onclick="f2(this.id,this.className)">
+                                下架
+                            </button>
+                            <button class="shanchu" th:id="${roomDetail.roomNumber}" onclick="f3(this.id)">
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pages ui-flex">
+                <div class="ui-flex-1"></div>
+                <span th:if="${page.hasPrevious()}" class="ui-flex">
+                    <a th:href="@{/hotel/roomManagement(page=${page.number-1},size=${page.size})}" id="previous">上一页</a>
+                </span>
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                    <span th:unless="${page.number == i}">
+                         <a th:href="@{/hotel/roomManagement(page=${i},size=${page.size})}" th:id=${i+1}>[[${i}+1]]</a>
+                    </span>
+                </th:block>
+                <span th:if="${page.hasNext()}" class="ui-flex">
+                    <a th:href="@{/hotel/roomManagement(page=${page.number+1},size=${page.size})}" id="next">下一页</a>
+                </span>
+                <div class="ui-flex-1"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

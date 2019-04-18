@@ -27,7 +27,7 @@ public class Server {
     private int finishTime;
     private int Satisfaction;
     private String appraisal;
-    private int ID;
+    private int ID;//accomId
     private int workID;
 
     @ManyToOne

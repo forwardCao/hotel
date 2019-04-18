@@ -15,12 +15,13 @@ import java.util.List;
 /**
  * Created bt caoqianfeng on 2019/3/2
  */
-public interface LoseGoodsJpa extends JpaRepository<LoseGoods, String>, JpaSpecificationExecutor<LoseGoods>, Serializable {
+public interface LoseGoodsJpa extends JpaRepository<LoseGoods, Integer>, JpaSpecificationExecutor<LoseGoods>, Serializable {
     List<LoseGoods> findByMemberIdOrRoomNumber(int memberId, int roomNumber);
     List<LoseGoods> findByDate(String date);
     List<LoseGoods> findByResult(byte date);
     Page<LoseGoods> findByResult(Pageable pageable,byte date);
     List<LoseGoods> findByRoomNumber(int roomID);
+    List<LoseGoods> findByMemberId(int i);
 
 
 }

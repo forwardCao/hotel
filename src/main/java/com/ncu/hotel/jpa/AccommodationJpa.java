@@ -4,6 +4,7 @@ import com.ncu.hotel.entiy.Accommodation;
 import com.ncu.hotel.entiy.Server;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -20,5 +21,5 @@ public interface AccommodationJpa extends JpaRepository<Accommodation, Integer>,
     Page<Accommodation> findByDate(Pageable pageable, Date date);
 //    List<Accommodation> findByRoomDetailRoomTypeAndDateBetween(char type,Date start,Date end);
     Page<Accommodation> findByRoomDetailRoomTypeAndDateBetween(Pageable pageable,char type,Date start,Date end);
-
+    List<Accommodation> findByMemberIdOrderByIDDesc(int i);
 }

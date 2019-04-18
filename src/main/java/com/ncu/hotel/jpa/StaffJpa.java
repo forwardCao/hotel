@@ -11,4 +11,5 @@ import java.io.Serializable;
  * Created bt caoqianfeng on 2019/3/2
  */
 public interface StaffJpa extends JpaRepository<Staff, Integer>, JpaSpecificationExecutor<Staff>, Serializable {
+    Staff findByName(String s);
 }

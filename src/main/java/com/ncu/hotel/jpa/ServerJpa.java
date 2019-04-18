@@ -16,6 +16,10 @@ import java.io.Serializable;
 public interface ServerJpa extends JpaRepository<Server, Integer>, JpaSpecificationExecutor<Server>, Serializable {
     List<Server> findByAccommodation_RoomNumber(int roomNumber);
     List<Server> findByCallTimeAfter(Date date);
+    List<Server> findByCallServerTypeAndWorkID(String s,int workid);
+    List<Server> findByCallServerTypeAndWorkIDAndFinishStatus(String s,int workid,byte status);
+    List<Server> findByWorkIDAndCallTimeBetween(int workid,Date start,Date end);
+
     List<Server> findByCallTimeAfterAndResponseStatus(Date date,byte flag);
     Page<Server> findByCallTimeAfterAndResponseStatus(Pageable pageable,Date date,byte flag);
     List<Server> findByCallTimeAfterAndFinishStatus(Date date,byte flag);

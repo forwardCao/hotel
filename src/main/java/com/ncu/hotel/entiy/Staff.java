@@ -13,13 +13,13 @@ import java.util.Set;
 @Entity
 public class Staff {
     @Id
-    @GeneratedValue
     private int workID;
     private int hotelID;
 
     private String cardID;
     private String department;
     private String name;
+    private byte flag;//1上岗 0下岗
 
     @JsonIgnore
     @ManyToOne
@@ -29,6 +29,14 @@ public class Staff {
     @JsonIgnore
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "staff")
     private Set<Server> servers=new HashSet<>();
+
+    public byte getFlag() {
+        return flag;
+    }
+
+    public void setFlag(byte flag) {
+        this.flag = flag;
+    }
 
     public int getHotelID() {
         return hotelID;

@@ -1,9 +1,6 @@
 package com.ncu.hotel.entiy;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -12,14 +9,14 @@ import java.util.Date;
 @Entity
 public class Orders {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int orderNumber;
 
     private Date orderDate;
     private String addServer;
     private Date liveDate;
     private Date leaveDate;
-    private byte bits;
+    private byte status;  //0 未付款  1已付款  2 取消
 
     @ManyToOne
     private Room room;
@@ -82,11 +79,13 @@ public class Orders {
         this.leaveDate = leaveDate;
     }
 
-    public byte getBits() {
-        return bits;
+    public byte getStatus() {
+        return status;
     }
 
-    public void setBits(byte bits) {
-        this.bits = bits;
+    public void setStatus(byte status) {
+        this.status = status;
     }
+
+
 }

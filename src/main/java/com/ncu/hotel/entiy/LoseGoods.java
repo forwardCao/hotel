@@ -14,13 +14,16 @@ public class LoseGoods {
     private int loseGoodsID;
 
     private String date;
-    private String dispose;
+    private String dispose; //部门
     private String worker;
     private String disposeWorker;
     private String losePhoto;
     private byte result;
     private int roomNumber;
     private int memberId;
+    private String address;//邮寄地址
+    private String name;
+    private String tel;
 
 
     @ManyToOne
@@ -114,5 +117,29 @@ public class LoseGoods {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 }

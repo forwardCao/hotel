@@ -23,6 +23,7 @@ public interface SaleJpa extends JpaRepository<Sale, SalePk>, JpaSpecificationEx
     @Query("delete from Sale u where u.hotelID = ?1 and u.roomType=?2")
     void deleteByHotelIDAndRoomType(int id,char type);
 
-
+    Sale findByDateAndHotelIDAndRoomType(Date date,int i,char type);
     List<Sale> findByDateBetween(Date start,Date end);
+    List<Sale> findByDate(Date date);
 }

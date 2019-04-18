@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 /**
  * Created bt caoqianfeng on 2019/2/10
  */
+@ApiIgnore
 @RestController
 @RequestMapping("/test")
 public class RestControl {
@@ -73,6 +75,7 @@ public class RestControl {
             System.out.println("null");
         }
     }
+
 
     @PostMapping("/hotel")
     public void saveHotel(Hotel hotel){
@@ -350,8 +353,8 @@ public class RestControl {
 //        System.out.println("json:"+object);
 //        System.out.println("json:"+object);
 
-        String dateBegin = (String) object.get("dateBegin")+ " 12:10:01";
-        String dateEnd = (String) object.get("dateEnd")+ " 12:10:01";
+        String dateBegin = (String) object.get("dateBegin")+ " 00:00:00";
+        String dateEnd = (String) object.get("dateEnd")+ " 23:59:59";
 //        System.out.println("dateBegin: "+dateBegin);
         String hotelId= (String) object.get("hotelId");
         Date start=format.parse(dateBegin);

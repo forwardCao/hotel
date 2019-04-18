@@ -16,7 +16,7 @@ public class Member {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int memberId;
 
-    private String name;
+    private String name;//真实姓名
     private String userName;
     private byte sex;
     private String birthday;
@@ -27,8 +27,9 @@ public class Member {
     private String certificateNumber;
     private String certificateFrontPhoto;
     private String certificateReversePhoto;
-    private int credit;
+    private int credit;//信用
     private byte flag;
+
     @JsonIgnore
     @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.LAZY,mappedBy = "member")
     private Set<Accommodation> accommodations=new HashSet<>();

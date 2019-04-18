@@ -32,7 +32,9 @@ public class Accommodation {
     private Date evaluateDate;
     private int toCustomerStar;
     private String toCustomerEvaluate;
-
+    private Date liveDate;
+    private Date leaveDate;
+    private int OrdersId;
 
     @ManyToOne
     private RoomDetail roomDetail ;
@@ -173,5 +175,29 @@ public class Accommodation {
 
     public void setToCustomerEvaluate(String toCustomerEvaluate) {
         this.toCustomerEvaluate = toCustomerEvaluate;
+    }
+
+    public Date getLiveDate() {
+        return liveDate;
+    }
+
+    public void setLiveDate(Date liveDate) {
+        this.liveDate = liveDate;
+    }
+
+    public Date getLeaveDate() {
+        return leaveDate;
+    }
+
+    public void setLeaveDate(Date leaveDate) {
+        this.leaveDate = leaveDate;
+    }
+
+    public int getOrdersId() {
+        return OrdersId;
+    }
+
+    public void setOrdersId(int ordersId) {
+        OrdersId = ordersId;
     }
 }

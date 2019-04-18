@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface RoomJpa extends JpaRepository<Room, RoomPk> , JpaSpecificationExecutor<Room>,Serializable {
     Room findByHotelIDAndAndRoomType(int id,char type);
+    Room findByDateAndHotelIDAndRoomType(Date date,int id,char type);
     List<Room> findByHotelID(int hotelId);
     List<Room> findByHotelIDAndDateBetween(int hotelId, Date start,Date end);
+    List<Room> findByDate(Date date);
 }
